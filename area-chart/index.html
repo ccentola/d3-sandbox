@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Line Chart</title>
+    <title>Area Chart</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Bootstrap v4 -->
@@ -19,12 +19,14 @@
   </head>
   <body>
     <nav class="navbar navbar-light bg-light">
-      <a class="navbar-brand" href="#">Line Chart</a>
+      <a class="navbar-brand" href="#">Area Chart</a>
     </nav>
 
     <!-- Bootstrap grid setup -->
     <div class="container">
-      <div class="row justify-content-center"><div id="chart-area"></div></div>
+      <div class="row justify-content-center">
+        <svg width="800" height="500"></svg>
+      </div>
     </div>
 
     <!-- D3 v5 -->

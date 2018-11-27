@@ -1,65 +1,57 @@
-/* Line Chart */
+/* bar chart */
 
-// PARAMETERS //////////////////////////////////////////////////////////////////
+// SET PARAMETERS //////////////////////////////////////////////////////////////
 
-// margins
-const margin = { left: 40, right: 30, top: 40, bottom: 30 };
+// define margins
+const margin = { left: 100, right: 10, top: 10, bottom: 100 };
 
-// width and height
-const width = 600 - margin.left - margin.right,
-  height = 400 - margin.top - margin.bottom;
+// define width and height
+const width = 600 - margin.left - margin.right;
+const height = 400 - margin.top - margin.bottom;
 
-/* SCALES */
+// define canvas
+const g = d3
+  .select('#chart-area')
+  .append('svg')
+  .attr('width', width + margin.left + margin.right)
+  .attr('height', height + margin.top + margin.bottom)
+  .append('g')
+  .attr('transform', `translate(${margin.left},${margin.top})`);
 
-// x scale
-const x = d3
-  .scaleTime()
-  .domain(d3.extent(data, d => d.date))
-  .range([margin.left, width - margin.right]);
+// x label
+const xLabel = g
+  .append('g')
+  .attr('class', 'x-axis-label')
+  .attr('x', width / 2)
+  .attr('y', height + 140)
+  .attr('font-size', '20px')
+  .attr('text-anchor', 'middle')
+  .text("The World's Tallest Buildings");
 
-// y scale
-const y = d3
-  .scaleLinear()
-  .domain([0, d3.max(data => d.value)])
-  .nice()
-  .range([height - margin.bottom, margin.top]);
+// y label
+const yLabel = g
+  .append('g')
+  .attr('class', 'y-axis-label')
+  .attr('x', -(height / 2))
+  .attr('y', -60)
+  .attr('font-size', '20px')
+  .attr('text-anchor', 'middle')
+  .attr('transform', 'rotate(-90)')
+  .text('Height (m)');
 
-/* AXES */
+// DRAW ///////////////////////////////////////////////////////////////////////
 
-// x axis
-const xAxis = g =>
-  g.attr('transform', `translate(0,${height - margin.bottom})`).call(
-    d3
-      .axisBottom(x)
-      .ticks(width / 80)
-      .tickSizeOuter(0)
-  );
-
-// y axis
-const yAxis = g =>
-  g
-    .attr('transform', `translate(${margin.left},0)`)
-    .call(d3.axisLeft(y))
-    .call(g => g.select('.domain').remove())
-    .call(g =>
-      g
-        .select('.tick:last-of-type text')
-        .clone()
-        .attr('x', 3)
-        .attr('text-anchor', 'start')
-        .attr('font-weight', 'bold')
-        .text(data.y)
-    );
-
-// DRAW VIZ ////////////////////////////////////////////////////////////////////
-
-// data
 d3.csv('data/walmart.csv')
   .then(data => {
+    // clean data
+    data.forEach(d => {
+      d.date = parseTime(d.date);
+      d.close = +d.close;
+    });
+
+    // log data to console
     console.log(data);
   })
   .catch(error => {
     console.log(error);
   });
-
-// HELPER FUNCTIONS ////////////////////////////////////////////////////////////
