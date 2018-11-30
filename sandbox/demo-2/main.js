@@ -1,8 +1,27 @@
+// margin
+const margin = { top: 20, right: 0, bottom: 30, left: 40 }
+const width = 600 - margin.left - margin.right;
+const height = 450 - margin.top - margin.bottom;
+
+// add an svg element to the page
+const svg = d3.select('body').append('svg')
+  .attr('width', 500)
+  .attr('height', 500)
+  .style('background', 'lightgray');
+
 // main call to data
 d3.csv('data/cities.csv').then(data => {
 
+  // type conversion
+  data.forEach(d => {
+    d.population = +d.population;
+  });
+
   // do something
   dataViz(data);
+
+  // log data
+  console.log(data);
 
 }).catch(error => {
 
@@ -14,13 +33,32 @@ d3.csv('data/cities.csv').then(data => {
 // function to create visualization
 function dataViz(incomingData) {
 
-  d3.select('body')               // select the body
-    .selectAll('div.cities')      // empty because there are no city divs
-    .data(incomingData)           // binds data to selection
+  // find the max population
+  const maxPopulation = d3.max(incomingData, d => d.population);
+
+  const x = d3.scaleBand()
+    .domain(incomingData.map(d => d.label))
+    .range([margin.left, width - margin.right])
+    .padding(0.1)
+
+  // set y scale
+  const y = d3.scaleLinear()
+    .domain([0, maxPopulation])
+    .range([height - margin.bottom, margin.top]);
+
+  d3.select('svg')
+    .selectAll('rect')
+    .data(incomingData)
     .enter()
-    .append('div')                // creates an element in the current selection
-    .attr('class', 'cities')      // sets the class
-    .html(d => d.label);          // sets the content
+    .append('rect')
+    .attr('width', x.bandwidth())
+    .attr('height', d => y(d.population))
+    .attr('x', (d) => x(d.label))
+    .attr('y', d => 480 - y(d.population))
+    .style('fill', 'orange')
+    .style('stroke', 'black')
+    .style('stroke-width', '1-px');
+
 
 }
 
