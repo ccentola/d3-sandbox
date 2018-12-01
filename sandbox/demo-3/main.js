@@ -25,25 +25,16 @@ svg.append('line')
 function circleTransition() {
 
   const circleOne = svg.append('circle')
-    .attr('cx', 100)
-    .attr('cy', 250)
     .attr('fill', 'red')
     .attr('r', 10);
-  repeat();
 
   const circleTwo = svg.append('circle')
-    .attr('cx', 400)
-    .attr('cy', 250)
     .attr('fill', 'blue')
     .attr('r', 10);
-
-  repeat();
 
   const circleThree = svg.append('circle')
     .attr('fill', 'green')
     .attr('r', 10);
-
-  repeat();
 
   const circleFour = svg.append('circle')
     .attr('fill', 'yellow')
@@ -53,16 +44,50 @@ function circleTransition() {
 
   function repeat() {
     circleOne
+      .attr('cx', 100)
+      .attr('cy', 250)
+      .transition()
+      .duration(2000)
+      .attr('cx', 400)
+      .transition()
+      .duration(2000)
+      .attr('cx', 100)
+      .on('end', repeat);
+
+    circleTwo
+      .attr('cx', 400)
+      .attr('cy', 250)
+      .transition()
+      .duration(2000)
+      .attr('cx', 100)
       .transition()
       .duration(2000)
       .attr('cx', 400)
       .on('end', repeat);
 
-    circleTwo
+    circleThree
+      .attr('cx', 250)
+      .attr('cy', 100)
       .transition()
       .duration(2000)
-      .attr('cx', 100)
+      .attr('cy', 400)
+      .transition()
+      .duration(2000)
+      .attr('cy', 100)
       .on('end', repeat);
+
+    circleFour
+      .attr('cx', 250)
+      .attr('cy', 400)
+      .transition()
+      .duration(2000)
+      .attr('cy', 100)
+      .transition()
+      .duration(2000)
+      .attr('cy', 400)
+      .on('end', repeat);
+
+
   }
 
 }
