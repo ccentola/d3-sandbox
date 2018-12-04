@@ -10,6 +10,11 @@
   fill: brown;
 }
 
-.axis-x path {
+/* .axis-x path {
   display: none;
+} */
+
+.bar text {
+  fill: #fff;
+  font: 10px sans-serif;
 }
