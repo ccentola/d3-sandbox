@@ -20,3 +20,6 @@ Repo to practice D3 charting.
 * tree map
 * tree diagram
 * area chart
+* sankey diagram
+* forced direction
+* dashboard layouts
