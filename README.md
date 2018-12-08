@@ -23,3 +23,4 @@ Repo to practice D3 charting.
 * sankey diagram
 * forced direction
 * dashboard layouts
+* pareto chart
