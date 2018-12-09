@@ -2,6 +2,9 @@
 
 Repo to practice D3 charting.
 
+## Site
+[https://ccentola.github.io/d3-sandbox/](https://ccentola.github.io/d3-sandbox/)
+
 
 ## Notes
 * getting a better understanding of adding elements from scratch
