@@ -34,9 +34,9 @@ const arc = d3.arc()
   .innerRadius(radius - thickness)
   .outerRadius(radius);
 
-// const pie = d3.pie()
-//   .value(d => d.value)
-//   .sort(null);
+const pie = d3.pie()
+  .value(d => d.value)
+  .sort(null);
 
 // const path = g.selectAll('path')
 //   .data(pie(data))
