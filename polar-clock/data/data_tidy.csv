@@ -1,0 +1,8 @@
+tower,sub-tower,cost
+Storage,Online Storage,25
+Storage,Offline Storage,100
+Application,App Dev,150
+Application,App Maint,15
+Network,LAN/WAN,2
+Network,Transport,17
+Network,Voice,6
