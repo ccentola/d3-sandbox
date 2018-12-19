@@ -1,6 +1,6 @@
 # d3-sandbox
 
-Repo to practice D3 charting.
+Repo to practice D3 charting. Need to add an additional repo for finished work; possibly aditional repos for some of the more basic chart types.
 
 ## Site
 [https://ccentola.github.io/d3-sandbox/](https://ccentola.github.io/d3-sandbox/)
